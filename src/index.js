@@ -25,9 +25,10 @@ export default function App() {
 
     async function handleLikeRepository(id) {
         const res = await api.post(`repositories/${id}/like`)
-        const repositorieIndex = respositories.findIndex(repositorie => repositorie.id == res.data.id)
+        const repositorieIndex = respositories(repositorie => repositorie.id == res.data.id)
         repositories[repositorieIndex] = res.data
         Setrepositories([...repositories])
+        Setrepositories(res.data)
      }
 
     return (
@@ -55,7 +56,7 @@ export default function App() {
                             style={styles.likeText}
                             // Remember to replace "1" below with repository ID: {`repository-like-${repository.id}`}
                         >
-                                Like:{repositorie.like}{repositorie.likes}
+                                Like:{repositorie.like},={repositorie.likes}
                         </Text>
                         </View> 
                     <TouchableOpacity
